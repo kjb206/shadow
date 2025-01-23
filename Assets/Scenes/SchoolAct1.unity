@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d489f962435ba498b20c427d5b1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: VegClassAct1
+  sceneToLoad: VegClass
   spawnPosition: {x: 0, y: -6.5, z: 0}
 --- !u!61 &692850522
 BoxCollider2D:
@@ -1872,6 +1872,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1341593360129933149, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341593360129933149, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: aff298aad4f59d84ca5842a601a791bb, type: 2}
     - target: {fileID: 3502207346355649245, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1919,6 +1927,14 @@ PrefabInstance:
     - target: {fileID: 4326311046900169181, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369349687411462629, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770636103085571707, guid: 94490c37c37ae1244aa0c584680c6911, type: 3}
+      propertyPath: m_Size.x
+      value: 0.625
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
