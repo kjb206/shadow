@@ -20,4 +20,28 @@ public class DoorwayTransition : MonoBehaviour
             SceneManager.LoadScene(sceneToLoad);
         }
     }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    // Retrieve spawn position
+    float x = PlayerPrefs.GetFloat("SpawnX", 0);
+    float y = PlayerPrefs.GetFloat("SpawnY", 0);
+
+    // Reposition the player
+    Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+    player.position = new Vector3(x, y, 0);
+
+    // Re-align the camera
+    Camera.main.transform.position = player.position + new Vector3(0, 0, -10);
+}
+
+private void OnEnable()
+{
+    SceneManager.sceneLoaded += OnSceneLoaded;
+}
+
+private void OnDisable()
+{
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+}
+
 }

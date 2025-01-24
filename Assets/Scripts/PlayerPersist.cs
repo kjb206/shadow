@@ -1,19 +1,22 @@
 using UnityEngine;
-
-public class PlayerPersistence : MonoBehaviour
+using System.Collections.Generic;
+public class PersistenceManager : MonoBehaviour
 {
-    private static PlayerPersistence instance;
+    private static HashSet<string> persistentObjects = new HashSet<string>();
 
     void Awake()
     {
-        if (instance == null)
+        // Ensure only one instance of each object persists
+        if (!persistentObjects.Contains(gameObject.name))
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Keeps the player object alive between scenes
+            persistentObjects.Add(gameObject.name);
+            DontDestroyOnLoad(gameObject);
+            Debug.Log($"{gameObject.name} is now persistent.");
         }
         else
         {
-            Destroy(gameObject); // Prevents duplicate players in new scenes
+            Debug.Log($"Destroying duplicate {gameObject.name}.");
+            Destroy(gameObject);
         }
     }
 }
