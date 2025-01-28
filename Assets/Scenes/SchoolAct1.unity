@@ -400,8 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d489f962435ba498b20c427d5b1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
-  spawnPosition: {x: 0, y: 0, z: 0}
+  sceneToLoad: BakingClass
+  spawnPosition: {x: 0, y: -6.5, z: 0}
 --- !u!1 &120360685
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,8 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d489f962435ba498b20c427d5b1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
-  spawnPosition: {x: 0, y: 0, z: 0}
+  sceneToLoad: ButcheryClass
+  spawnPosition: {x: 0, y: -6.5, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,8 +1365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d489f962435ba498b20c427d5b1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
-  spawnPosition: {x: 0, y: 0, z: 0}
+  sceneToLoad: StairwellTop
+  spawnPosition: {x: 0.8, y: 0, z: 0}
 --- !u!1 &1285723310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,8 +2055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d489f962435ba498b20c427d5b1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
-  spawnPosition: {x: 0, y: 0, z: 0}
+  sceneToLoad: ClassClass
+  spawnPosition: {x: 0, y: -6.5, z: 0}
 --- !u!1001 &3163715326710561646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2300,6 +2300,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1615278778}
+    - target: {fileID: 1416252613584917033, guid: da2a6745f0f39a744a1851f4db09f977, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416252613584917033, guid: da2a6745f0f39a744a1851f4db09f977, type: 3}
+      propertyPath: field of view
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416252613584917033, guid: da2a6745f0f39a744a1851f4db09f977, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4055282743613756287, guid: da2a6745f0f39a744a1851f4db09f977, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -29,8 +29,8 @@ public static class MousePositionDisplay
                 new Vector3(mousePos.x, mousePos.y, 10f)
             );
 
-            // (Optional) Log to Console for debugging
-            Debug.Log($"Mouse World Position: {_lastWorldPos}");
+            // Log to Console for debugging
+            // Debug.Log($"Mouse World Position: {_lastWorldPos}");
 
             // Force immediate Scene view refresh
             sceneView.Repaint();

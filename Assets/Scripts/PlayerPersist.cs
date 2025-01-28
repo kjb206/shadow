@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 public class PersistenceManager : MonoBehaviour
 {
     private static HashSet<string> persistentObjects = new HashSet<string>();
@@ -17,6 +18,30 @@ public class PersistenceManager : MonoBehaviour
         {
             Debug.Log($"Destroying duplicate {gameObject.name}.");
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        // Restore player's position
+        float spawnX = PlayerPrefs.GetFloat("SpawnX", transform.position.x);
+        float spawnY = PlayerPrefs.GetFloat("SpawnY", transform.position.y);
+        transform.position = new Vector2(spawnX, spawnY);
+
+        // Restore player's direction
+        float moveX = PlayerPrefs.GetFloat("MoveX", 0);
+        float moveY = PlayerPrefs.GetFloat("MoveY", 0);
+
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetFloat("MoveX", moveX);
+            animator.SetFloat("MoveY", moveY);
+            Debug.Log($"Animator parameters restored: MoveX = {moveX}, MoveY = {moveY}");
+        }
+        else
+        {
+            Debug.LogError("Animator not found on the Player GameObject!");
         }
     }
 }

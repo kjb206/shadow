@@ -18,8 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/BakingClass.unity
     guid: 85880b0cdf24d404ab294c6848b7407f
   - enabled: 1
+    path: Assets/Scenes/Recieving.unity
+    guid: dc81fe874970b8c44a0e8b56b908a049
+  - enabled: 1
+    path: Assets/Scenes/StairwellBottom.unity
+    guid: 5a5d9fb2ea682e44086580b25fd56cd5
+  - enabled: 1
     path: Assets/Scenes/ButcheryClass.unity
     guid: e91e07316bbb5c241bc2ab5dba261c85
+  - enabled: 1
+    path: Assets/Scenes/StairwellTop.unity
+    guid: 4630ea93928108d4f9446bc78d446885
   - enabled: 1
     path: Assets/Scenes/ClassClass.unity
     guid: a2ce7b3b4aa45ea4b84a384c7ced84fd
