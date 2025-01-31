@@ -23,25 +23,26 @@ public class PersistenceManager : MonoBehaviour
 
     private void Start()
     {
-        // Restore player's position
-        float spawnX = PlayerPrefs.GetFloat("SpawnX", transform.position.x);
-        float spawnY = PlayerPrefs.GetFloat("SpawnY", transform.position.y);
-        transform.position = new Vector2(spawnX, spawnY);
+         // Restore player's position
+    float spawnX = PlayerPrefs.GetFloat("SpawnX", transform.position.x);
+    float spawnY = PlayerPrefs.GetFloat("SpawnY", transform.position.y);
+    transform.position = new Vector2(spawnX, spawnY);
 
-        // Restore player's direction
-        float moveX = PlayerPrefs.GetFloat("MoveX", 0);
-        float moveY = PlayerPrefs.GetFloat("MoveY", 0);
+    // Restore player's direction
+    float moveX = PlayerPrefs.GetFloat("MoveX", 0);
+    float moveY = PlayerPrefs.GetFloat("MoveY", 0);
 
-        Animator animator = GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.SetFloat("MoveX", moveX);
-            animator.SetFloat("MoveY", moveY);
-            Debug.Log($"Animator parameters restored: MoveX = {moveX}, MoveY = {moveY}");
-        }
-        else
-        {
-            Debug.LogError("Animator not found on the Player GameObject!");
-        }
+    // Find the Animator (even if it's on a child object)
+    Animator animator = GetComponentInChildren<Animator>();
+    
+    if (animator != null)
+    {
+        animator.SetFloat("MoveX", moveX);
+        animator.SetFloat("MoveY", moveY);
+        Debug.Log($"Animator parameters restored: MoveX = {moveX}, MoveY = {moveY}");
     }
-}
+    else
+    {
+        Debug.LogError($"Animator not found on {gameObject.name} or its children!");
+    }
+}}
