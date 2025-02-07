@@ -42,6 +42,11 @@ public class PauseMenu : MonoBehaviour
         // Implement inventory system here
     }
 
+    public void OpenStat()
+    {
+        Debug.Log("Opening Stat (Placeholder)");
+        // Implement inventory system here
+    }
     public void OpenSettings()
     {
         Debug.Log("Opening Settings (Placeholder)");
