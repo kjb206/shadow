@@ -23,16 +23,13 @@ public class PersistenceManager : MonoBehaviour
 
     private void Start()
     {
-         // Restore player's position
     float spawnX = PlayerPrefs.GetFloat("SpawnX", transform.position.x);
     float spawnY = PlayerPrefs.GetFloat("SpawnY", transform.position.y);
     transform.position = new Vector2(spawnX, spawnY);
 
-    // Restore player's direction
     float moveX = PlayerPrefs.GetFloat("MoveX", 0);
     float moveY = PlayerPrefs.GetFloat("MoveY", 0);
 
-    // Find the Animator (even if it's on a child object)
     Animator animator = GetComponentInChildren<Animator>();
     
     if (animator != null)

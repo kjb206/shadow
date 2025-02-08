@@ -2,28 +2,37 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player; // Reference to the player's transform
-    public float smoothSpeed = 5f; // Smooth follow speed
-    public Vector3 offset = new Vector3(0, -5, -10); // Offset from the player's position
+    public Transform player;
+    public float smoothSpeed = 5f;
+    public Vector3 offset = new Vector3(0, -5, -10);
 
-    void LateUpdate()
+    void Start()
     {
-        if (player == null)
+        if (player == null) 
         {
-            // Attempt to find the player dynamically if the reference is missing
-            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
-            if (foundPlayer != null)
-            {
-                player = foundPlayer.transform;
-            }
-        }
-
-        if (player != null)
-        {
-            // Smoothly follow the player
-            Vector3 desiredPosition = player.position + offset;
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = desiredPosition;
+            FindPlayer();
         }
     }
+    void LateUpdate()
+    {
+        if (player == null) return;
+
+        Vector3 desiredPosition = player.position + offset;
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+    }
+    void Awake()
+    {
+        if (Object.FindObjectsByType(GetType(), FindObjectsSortMode.None).Length > 1)
+        {
+           Destroy(gameObject); // Destroy duplicate instance
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void FindPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
+    
 }
