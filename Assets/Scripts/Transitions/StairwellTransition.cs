@@ -3,25 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class StairwellTransition : MonoBehaviour
 {
-    [SerializeField] private string sceneToLoad;       // Name of the scene to load
-    [SerializeField] private Vector2 spawnPosition;   // Player's spawn position in the new scene
-
+    [SerializeField] private string sceneToLoad; 
+    [SerializeField] private Vector2 spawnPosition;  
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            // Save the player's spawn position
             PlayerPrefs.SetFloat("SpawnX", spawnPosition.x);
             PlayerPrefs.SetFloat("SpawnY", spawnPosition.y);
-
-            // Flip the player's animation direction immediately
             FlipPlayerDirection(other);
-
-            // Transition to the new scene
             SceneManager.LoadScene(sceneToLoad);
         }
     }
-
     private void FlipPlayerDirection(Collider2D player)
     {
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();

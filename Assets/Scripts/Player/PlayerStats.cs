@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Core Stats
     public int level = 1;
     public int exp = 0;
     public int maxHP = 100;
     public int currentHP;
     public int maxMP = 50;
     public int currentMP;
-    
-    // Attributes
     public int strength = 10;
     public int defense = 5;
     public int magic = 8;
@@ -24,23 +21,18 @@ public class PlayerStats : MonoBehaviour
         currentHP = maxHP;
         currentMP = maxMP;
     }
-
-    // Method to take damage
     public void TakeDamage(int damage)
     {
         int damageTaken = Mathf.Max(damage - defense, 1); // Minimum damage is 1
         currentHP -= damageTaken;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
-
-    // Method to recover HP
     public void Heal(int amount)
     {
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 
-    // Method to consume MP
     public bool UseMP(int amount)
     {
         if (currentMP >= amount)
@@ -50,8 +42,6 @@ public class PlayerStats : MonoBehaviour
         }
         return false; // Not enough MP
     }
-
-    // Method to gain EXP and level up
     public void GainEXP(int amount)
     {
         exp += amount;
@@ -60,7 +50,7 @@ public class PlayerStats : MonoBehaviour
 
     private void CheckLevelUp()
     {
-        int expThreshold = level * 100; // Example leveling curve
+        int expThreshold = level * 100; 
         while (exp >= expThreshold)
         {
             exp -= expThreshold;
@@ -73,8 +63,7 @@ public class PlayerStats : MonoBehaviour
     {
         level++;
         maxHP += 10;
-        maxMP += 5;
-        
+        maxMP += 5;        
         // Random stat boosts every 5 levels
         if (level % 5 == 0)
         {
@@ -88,8 +77,7 @@ public class PlayerStats : MonoBehaviour
             resistance += 1;
             agility += 1;
             luck += 1;
-        }
-        
+        }    
         // Restore HP and MP upon leveling up
         currentHP = maxHP;
         currentMP = maxMP;

@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public RectTransform menuPanel; // Assign the menu panel in the inspector
-    public float slideSpeed = 10f;
+    public RectTransform menuPanel;
+    public float slideSpeed = 3f;
     private Vector2 hiddenPosition;
     private Vector2 visiblePosition;
     private bool isMenuOpen = false;
 
-    public Button[] tabButtons; // Array of tab buttons
-    public GameObject[] tabPanels; // Corresponding tab panels
-    private int currentTab = 0; // Tracks the active tab
+    public Button[] tabButtons; 
+    public GameObject[] tabPanels; 
+    private int currentTab = 0; 
 
     void Start()
     {

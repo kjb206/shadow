@@ -16,7 +16,6 @@ public class StatsMenu : MonoBehaviour
 
     public void UpdateStats()
     {
-        // Update the text elements with the player's current stats
         hpText.text = "HP: " + playerStats.currentHP + "/" + playerStats.maxHP;
         mpText.text = "MP: " + playerStats.currentMP + "/" + playerStats.maxMP;
         strengthText.text = "Strength: " + playerStats.strength;
@@ -31,11 +30,9 @@ public class StatsMenu : MonoBehaviour
 
     public void ToggleStatsMenu()
 {
-    // Toggle the visibility of the Stats menu
     bool isActive = gameObject.activeSelf;
     gameObject.SetActive(!isActive);
 
-    // If closing the Stats menu, ensure Pause Menu is visible
     if (!isActive)
     {
         GameObject pauseMenu = GameObject.Find("PauseMenuPanel");
