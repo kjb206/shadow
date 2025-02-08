@@ -30,14 +30,19 @@ public class StatsMenu : MonoBehaviour
     }
 
     public void ToggleStatsMenu()
-    {
-        // Toggle visibility
-        gameObject.SetActive(!gameObject.activeSelf);
+{
+    // Toggle the visibility of the Stats menu
+    bool isActive = gameObject.activeSelf;
+    gameObject.SetActive(!isActive);
 
-        // If enabling, refresh stats
-        if (gameObject.activeSelf)
+    // If closing the Stats menu, ensure Pause Menu is visible
+    if (!isActive)
+    {
+        GameObject pauseMenu = GameObject.Find("PauseMenuPanel");
+        if (pauseMenu != null)
         {
-            UpdateStats();
+            pauseMenu.SetActive(true);
         }
     }
+}
 }
