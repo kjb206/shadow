@@ -10,19 +10,26 @@ public class Menu : MonoBehaviour
     private Vector2 visiblePosition;
     private bool isMenuOpen = false;
 
-    public Button[] tabButtons; 
-    public GameObject[] tabPanels; 
-    private int currentTab = 0; 
+    public Button[] tabButtons;
+    public GameObject[] tabPanels;
+    private int currentTab = -1;
 
-    void Start()
+    void OnEnable()
     {
         hiddenPosition = new Vector2(-menuPanel.rect.width, menuPanel.anchoredPosition.y);
-        visiblePosition = new Vector2(0, menuPanel.anchoredPosition.y);
+        visiblePosition = new Vector2(menuPanel.rect.width / 2, menuPanel.anchoredPosition.y);
         menuPanel.anchoredPosition = hiddenPosition;
-        
-        foreach (Button button in tabButtons)
+
+        foreach (var panel in tabPanels)
         {
-            button.onClick.AddListener(() => SwitchTab(System.Array.IndexOf(tabButtons, button)));
+            if (panel != null) panel.SetActive(false);
+        }
+
+        for (int i = 0; i < tabButtons.Length; i++)
+        {
+            int tabIndex = i;
+            tabButtons[i].onClick.RemoveAllListeners();
+            tabButtons[i].onClick.AddListener(() => SwitchTab(tabIndex));
         }
     }
 
@@ -31,6 +38,11 @@ public class Menu : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(SlideMenu(isMenuOpen ? hiddenPosition : visiblePosition));
         isMenuOpen = !isMenuOpen;
+
+        Time.timeScale = isMenuOpen ? 0f : 1f;
+
+        PlayerMovement playerMovement = GameObject.FindWithTag("Player")?.GetComponent<PlayerMovement>();
+        if (playerMovement != null) playerMovement.enabled = !isMenuOpen;
     }
 
     private IEnumerator SlideMenu(Vector2 targetPosition)
@@ -41,34 +53,27 @@ public class Menu : MonoBehaviour
             yield return null;
         }
         menuPanel.anchoredPosition = targetPosition;
-        if (!isMenuOpen) DisableMenu();
     }
-
-    private void DisableMenu()
-    {
-        foreach (Button button in tabButtons) button.interactable = false;
-    }
-
-    private void EnableMenu()
-    {
-        foreach (Button button in tabButtons) button.interactable = true;
-    }
-
     public void SwitchTab(int tabIndex)
     {
-        if (tabIndex == currentTab) return;
-        
+        if (tabIndex < 0 || tabIndex >= tabPanels.Length) return;
+
+        if (tabIndex == currentTab && tabPanels[tabIndex].activeSelf)
+        {
+            tabPanels[tabIndex].SetActive(false);
+            currentTab = -1;
+            return;
+        }
+
         for (int i = 0; i < tabPanels.Length; i++)
         {
-            tabPanels[i].SetActive(i == tabIndex);
+            if (tabPanels[i] != null) tabPanels[i].SetActive(i == tabIndex);
         }
-        currentTab = tabIndex;
+
+        currentTab = tabPanels[tabIndex].activeSelf ? tabIndex : -1;
     }
     void Update()
-{
-    if (Input.GetKeyDown(KeyCode.Tab))
     {
-        ToggleMenu();
+        if (Input.GetKeyDown(KeyCode.Tab)) ToggleMenu();
     }
-}
 }
