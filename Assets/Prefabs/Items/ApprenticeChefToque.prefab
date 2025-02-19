@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 681659722246559883}
   - component: {fileID: 3585619599301138836}
   - component: {fileID: 1205768940005618730}
+  - component: {fileID: -860845081906225045}
   m_Layer: 0
   m_Name: ApprenticeChefToque
   m_TagString: Untagged
@@ -162,3 +163,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-860845081906225045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102940948210305114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 904cbd07cf0857f4f881b3599a3cb215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
