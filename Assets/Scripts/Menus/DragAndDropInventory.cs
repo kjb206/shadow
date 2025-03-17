@@ -7,7 +7,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private CanvasGroup canvasGroup;
     private Transform originalParent;
     private Vector2 originalPosition;
-
+    private ItemData itemData;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -42,5 +42,15 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             originalParent.GetComponent<InventorySlot>()?.ClearSlot(); // Ensure old slot is cleared
         }
+    }
+    public ItemData GetItemData()
+    {
+        
+        return itemData;
+    }
+    
+    public void Initialize(ItemData newItem)
+    {
+        itemData = newItem;
     }
 }

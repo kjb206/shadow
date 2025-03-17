@@ -31,7 +31,7 @@ public class InventoryManager : MonoBehaviour
             {
                 GameObject slot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
                 InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
-                slotComponent.SetGridPosition(x, y);
+               // slotComponent.SetGridPosition(x, y);
                 inventoryGrid[x, y] = slotComponent;
             }
         }
@@ -43,11 +43,11 @@ public class InventoryManager : MonoBehaviour
         {
             for (int x = 0; x < inventoryWidth; x++) // Iterate columns
             {
-                if (!inventoryGrid[x, y].IsOccupied)
-                {
-                    PlaceItem(itemData, x, y);
-                    return true;
-                }
+              //  if (!inventoryGrid[x, y].IsOccupied)
+              //  {
+              //      PlaceItem(itemData, x, y);
+              //      return true;
+              //  }
             }
         }
         return false; // No available space
@@ -62,6 +62,10 @@ public class InventoryManager : MonoBehaviour
         newItem.transform.SetParent(inventoryGrid[x, y].transform);
         newItem.transform.localPosition = Vector3.zero;
 
-        inventoryGrid[x, y].SetOccupied(true, newItem);
+        //inventoryGrid[x, y].SetOccupied(true, newItem);
+    }
+    public void ToggleInventory(bool isOpen)
+    {
+        inventoryPanel.SetActive(isOpen);
     }
 }

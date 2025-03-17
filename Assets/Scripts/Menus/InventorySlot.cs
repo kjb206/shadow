@@ -1,34 +1,28 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IDropHandler
+public class InventorySlot : MonoBehaviour
 {
-    public int gridX, gridY;
-    private GameObject occupyingItem;
+    public Image itemIcon;  // Reference to the slot's image
+    public ItemData item;   // The current item in the slot
 
-    public bool IsOccupied => occupyingItem != null;
-    public void SetGridPosition(int x, int y)
+    // Adds an item to the slot
+    public void AddItem(ItemData newItem)
     {
-        gridX = x;
-        gridY = y;
-    }
-    public void SetOccupied(bool occupied, GameObject item)
-    {
-        occupyingItem = occupied ? item : null;
-    }
+        item = newItem;
 
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (!IsOccupied && eventData.pointerDrag != null)
+        if (itemIcon != null && item != null)
         {
-            occupyingItem = eventData.pointerDrag;
-            occupyingItem.transform.SetParent(transform);
-            occupyingItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            itemIcon.sprite = item.icon; // Assign the sprite
+            itemIcon.enabled = true; // Make sure it's visible
         }
     }
 
+    // Clears the slot (empty state)
     public void ClearSlot()
     {
-        occupyingItem = null;
+        item = null;
+        itemIcon.sprite = null;
+        itemIcon.enabled = false; // Hide the icon when no item is assigned
     }
 }
