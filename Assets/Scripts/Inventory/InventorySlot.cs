@@ -1,62 +1,70 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Image itemIcon;
     public ItemData item;
 
+    private Transform originalParent;
+    private CanvasGroup canvasGroup;
+
     void Start()
     {
-        Debug.Log("InventorySlot Script is Running on: " + gameObject.name);
-
         if (item != null)
-        {
-            Debug.Log("Auto-Assigning item in Start(): " + item.itemName);
             AddItem(item);
-        }
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
 
     public void AddItem(ItemData newItem)
-{
-    item = newItem;
-
-    Debug.Log("🔍 AddItem() called - Item: " + (item != null ? item.itemName : "NULL"));
-
-    if (itemIcon != null)
     {
-        if (item != null)
+        item = newItem;
+        if (item != null && item.icon != null)
         {
-            if (item.icon != null)
-            {
-                Debug.Log("✅ Setting sprite for: " + item.itemName);
-                itemIcon.sprite = item.icon;  
-                itemIcon.enabled = true; 
-                itemIcon.gameObject.SetActive(true);  
-                Debug.Log("✅ ItemIcon should now be visible!");
-            }
-            else
-            {
-                Debug.LogWarning("❌ item.icon is NULL for: " + item.itemName);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("❌ item is NULL when calling AddItem()");
+            itemIcon.sprite = item.icon;
+            itemIcon.enabled = true;
+            itemIcon.gameObject.SetActive(true);
         }
     }
-    else
-    {
-        Debug.LogWarning("❌ itemIcon is NULL in InventorySlot");
-    }
-}
-
 
     public void ClearSlot()
     {
         item = null;
         itemIcon.sprite = null;
         itemIcon.enabled = false;
-        Debug.Log("Slot cleared");
+        itemIcon.gameObject.SetActive(false);
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (item == null) return;
+
+        InventoryDragManager.Instance.BeginDrag(this, itemIcon.sprite);
+        canvasGroup.alpha = 0.6f;
+        canvasGroup.blocksRaycasts = false;
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (InventoryDragManager.Instance != null)
+            InventoryDragManager.Instance.OnDrag(eventData);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+
+        InventoryDragManager.Instance.EndDrag();
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+        InventorySlot sourceSlot = InventoryDragManager.Instance.CurrentSlot;
+        if (sourceSlot == this) return;
+
+        ItemData temp = item;
+        AddItem(sourceSlot.item);
+        sourceSlot.AddItem(temp);
     }
 }
